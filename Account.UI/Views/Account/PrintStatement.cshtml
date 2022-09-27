@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Account.Backend.Amount>
+
+@{
+    ViewData["Title"] = "PrintStatement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Balance Statement</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                Amount
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                @{ if (item.DepositAmount > 0)
+                    {
+                        <td>
+                            @item.DepositAmount
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            -@item.WithdrawalAmount
+                        </td>
+                    }
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+
+
+
+            </tr>
+        }
+    </tbody>
+</table>
